@@ -24,11 +24,18 @@ export default async function HomePage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6">
       <div className="text-center py-4 flex flex-col items-center gap-3">
-        <img
-          src="/torii.png"
-          alt="Torii gate"
-          className="w-40 h-40 object-contain rounded-2xl"
-        />
+        <div className="flex items-center gap-4">
+          <img
+            src="/torii.png"
+            alt="Torii gate"
+            className="w-40 h-40 object-contain rounded-2xl"
+          />
+          <img
+            src="/basse-asbjorn.jpg"
+            alt="Basse og Asbjørn"
+            className="w-40 h-40 object-cover rounded-2xl"
+          />
+        </div>
         <h1 className="text-3xl font-bold text-ink">Japan-app 🇯🇵</h1>
         <p className="text-ink-muted text-sm">Basse og Asbjørns rejse til Japan</p>
       </div>
