@@ -27,5 +27,18 @@ export interface EntryWithCity extends Entry {
   cities: City;
 }
 
+export interface CityDate {
+  id: string;
+  city_id: string;
+  start_date: string;
+  end_date: string;
+}
+
+export interface CalendarEntry {
+  id: string;
+  entry_id: string;
+  scheduled_date: string;
+}
+
 export type NewEntry = Omit<Entry, "id" | "created_at" | "updated_at">;
 export type UpdateEntry = Partial<NewEntry>;
