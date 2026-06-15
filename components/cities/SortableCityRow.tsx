@@ -8,9 +8,10 @@ interface Props {
   id: string;
   name: string;
   entryCount: number;
+  onDelete: (id: string, name: string) => void;
 }
 
-export function SortableCityRow({ id, name, entryCount }: Props) {
+export function SortableCityRow({ id, name, entryCount, onDelete }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id });
 
@@ -41,7 +42,7 @@ export function SortableCityRow({ id, name, entryCount }: Props) {
         </svg>
       </button>
       <div className="flex-1 min-w-0">
-        <CityRow id={id} name={name} entryCount={entryCount} />
+        <CityRow id={id} name={name} entryCount={entryCount} onDelete={onDelete} />
       </div>
     </div>
   );

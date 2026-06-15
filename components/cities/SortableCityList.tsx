@@ -15,7 +15,7 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
-import { updateCitiesOrder } from "@/app/actions/cities";
+import { updateCitiesOrder, deleteCity } from "@/app/actions/cities";
 import { SortableCityRow } from "./SortableCityRow";
 
 interface City {
@@ -40,8 +40,22 @@ export function SortableCityList({ cities }: { cities: City[] }) {
     const newIndex = items.findIndex((c) => c.id === over.id);
     const reordered = arrayMove(items, oldIndex, newIndex);
 
-    setItems(reordered); // optimistic update
+    setItems(reordered);
     await updateCitiesOrder(reordered.map((c) => c.id));
+  }
+
+  async function handleDelete(id: string, name: string) {
+    if (!confirm(`Slet "${name}"? Alle steder i denne by slettes også.`)) return;
+
+    // Optimistically remove from list immediately
+    const previous = items;
+    setItems((curr) => curr.filter((c) => c.id !== id));
+
+    try {
+      await deleteCity(id);
+    } catch {
+      setItems(previous); // restore on error
+    }
   }
 
   return (
@@ -54,6 +68,7 @@ export function SortableCityList({ cities }: { cities: City[] }) {
               id={city.id}
               name={city.name}
               entryCount={city.entryCount}
+              onDelete={handleDelete}
             />
           ))}
         </div>
