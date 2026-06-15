@@ -227,23 +227,39 @@ function UploadVideoField({ defaultUrl }: { defaultUrl: string | null }) {
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(defaultUrl);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [progress, setProgress] = useState<string | null>(null);
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
     setUploadError(null);
-
-    const form = new FormData();
-    form.append("file", file);
+    setProgress("Henter upload-link…");
 
     try {
-      const res = await fetch("/api/upload", { method: "POST", body: form });
-      if (!res.ok) throw new Error("Upload failed");
-      const { url } = await res.json();
-      setUploadedUrl(url);
-    } catch {
-      setUploadError("Upload mislykkedes. Prøv igen.");
+      // Step 1: get a presigned URL from our API (tiny request, no Vercel size limit)
+      const res = await fetch("/api/upload-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ filename: file.name }),
+      });
+      if (!res.ok) throw new Error("Kunne ikke hente upload-link");
+      const { signedUrl, publicUrl } = await res.json();
+
+      // Step 2: upload directly to Supabase Storage (bypasses Vercel's 4.5 MB limit)
+      setProgress("Uploader video…");
+      const uploadRes = await fetch(signedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": file.type || "video/mp4" },
+        body: file,
+      });
+      if (!uploadRes.ok) throw new Error("Upload mislykkedes");
+
+      setUploadedUrl(publicUrl);
+      setProgress(null);
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload mislykkedes. Prøv igen.");
+      setProgress(null);
     } finally {
       setUploading(false);
     }
@@ -255,11 +271,12 @@ function UploadVideoField({ defaultUrl }: { defaultUrl: string | null }) {
         type="file"
         accept="video/*"
         onChange={handleFileChange}
-        className="text-sm text-ink-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-japan-red file:text-white file:font-medium"
+        disabled={uploading}
+        className="text-sm text-ink-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-japan-red file:text-white file:font-medium disabled:opacity-50"
       />
-      {uploading && <p className="text-sm text-ink-muted">Uploader…</p>}
+      {progress && <p className="text-sm text-ink-muted">{progress}</p>}
       {uploadError && <p className="text-sm text-japan-red">{uploadError}</p>}
-      {uploadedUrl && (
+      {uploadedUrl && !uploading && (
         <>
           <input type="hidden" name="video_url" value={uploadedUrl} />
           <p className="text-sm text-ink-muted">✓ Video uploadet</p>
