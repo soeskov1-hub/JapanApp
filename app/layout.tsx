@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   description: "Min Japan-rejseplanlægger — seværdigheder, restauranter og mere.",
   manifest: "/manifest.json",
   icons: {
-    icon: "/torii.png",
     apple: "/torii.png",
   },
 };
