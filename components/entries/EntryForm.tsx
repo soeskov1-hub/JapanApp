@@ -46,7 +46,7 @@ export function EntryForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-5 p-5">
+    <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-4 p-4 sm:p-5">
       <h2 className="text-xl font-bold text-ink">
         {entry ? "Rediger 🇯🇵" : "Tilføj ny 🇯🇵"}
       </h2>
@@ -58,7 +58,7 @@ export function EntryForm({
           name="city_id"
           defaultValue={entry?.city_id ?? defaultCityId ?? ""}
           required
-          className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink focus:outline-none focus:ring-2 focus:ring-japan-red"
+          className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-3 text-ink focus:outline-none focus:ring-2 focus:ring-japan-red"
         >
           <option value="" disabled>Vælg by…</option>
           {cities.map((c) => (
@@ -70,11 +70,11 @@ export function EntryForm({
       {/* Type */}
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-semibold text-ink-light">Type</label>
-        <div className="grid grid-cols-5 gap-1.5">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
           {ENTRY_TYPES.map((t) => (
             <label
               key={t.value}
-              className={`flex flex-col items-center gap-1 p-2 rounded-xl border cursor-pointer transition-all text-xs font-medium ${
+              className={`flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl border cursor-pointer transition-all text-xs font-medium min-h-[72px] ${
                 selectedType === t.value
                   ? "border-japan-red bg-japan-red/10 text-japan-red"
                   : "border-paper-dark bg-paper text-ink-muted"
@@ -88,7 +88,7 @@ export function EntryForm({
                 onChange={() => setSelectedType(t.value as typeof selectedType)}
                 className="sr-only"
               />
-              <span className="text-xl">{t.emoji}</span>
+              <span className="text-2xl">{t.emoji}</span>
               <span className="leading-tight text-center">{t.label}</span>
             </label>
           ))}
@@ -104,7 +104,7 @@ export function EntryForm({
           defaultValue={entry?.name ?? ""}
           required
           placeholder="f.eks. Senso-ji Temple"
-          className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
+          className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-3 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
         />
       </div>
 
@@ -119,7 +119,7 @@ export function EntryForm({
             name="address"
             defaultValue={entry?.address ?? ""}
             placeholder="f.eks. 2-3-1 Asakusa, Taito City, Tokyo"
-            className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
+            className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-3 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
           />
         </div>
       )}
@@ -174,7 +174,7 @@ export function EntryForm({
           defaultValue={entry?.notes ?? ""}
           rows={3}
           placeholder="Åbningstider, tips, anbefalinger…"
-          className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red resize-none"
+          className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-3 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red resize-none"
         />
       </div>
 
