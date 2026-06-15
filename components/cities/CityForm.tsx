@@ -16,8 +16,8 @@ export function CityForm() {
     startTransition(async () => {
       try {
         await createCity(data);
-        router.push("/");
-        router.refresh();
+        router.back();    // close the modal
+        router.refresh(); // reload server data so new city appears
       } catch (err) {
         setError(err instanceof Error ? err.message : "Noget gik galt");
       }

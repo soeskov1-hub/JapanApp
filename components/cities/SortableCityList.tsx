@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   DndContext,
   closestCenter,
@@ -26,6 +26,11 @@ interface City {
 
 export function SortableCityList({ cities }: { cities: City[] }) {
   const [items, setItems] = useState(cities);
+
+  // Sync when server re-renders with new data (e.g. after adding a city)
+  useEffect(() => {
+    setItems(cities);
+  }, [cities]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
