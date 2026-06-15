@@ -48,6 +48,8 @@ alter table entries enable row level security;
 
 create policy "public read cities" on cities for select using (true);
 create policy "public insert cities" on cities for insert with check (true);
+create policy "public update cities" on cities for update using (true);
+create policy "public delete cities" on cities for delete using (true);
 
 create policy "public read entries" on entries for select using (true);
 create policy "public insert entries" on entries for insert with check (true);
