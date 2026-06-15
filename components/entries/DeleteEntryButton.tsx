@@ -9,7 +9,7 @@ export function DeleteEntryButton({ entryId }: { entryId: string }) {
   const router = useRouter();
 
   function handleDelete() {
-    if (!confirm("Delete this item?")) return;
+    if (!confirm("Slet dette element?")) return;
     startTransition(async () => {
       await deleteEntry(entryId);
       router.refresh();

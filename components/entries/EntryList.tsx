@@ -16,8 +16,8 @@ export function EntryList({ entries, activeType }: EntryListProps) {
     return (
       <div className="text-center py-16 text-ink-muted">
         <p className="text-4xl mb-3">🗾</p>
-        <p className="font-medium">Nothing here yet</p>
-        <p className="text-sm mt-1">Tap + to add your first item</p>
+        <p className="font-medium">Intet her endnu</p>
+        <p className="text-sm mt-1">Tryk + for at tilføje dit første sted</p>
       </div>
     );
   }

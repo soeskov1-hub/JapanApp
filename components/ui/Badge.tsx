@@ -6,8 +6,8 @@ const styles: Record<Priority, string> = {
 };
 
 const labels: Record<Priority, string> = {
-  "must-do": "Must-do",
-  "nice-to-have": "Nice-to-have",
+  "must-do": "Skal ses",
+  "nice-to-have": "Hvis tid",
 };
 
 export function Badge({ priority }: { priority: Priority }) {

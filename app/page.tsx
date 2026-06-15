@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { CityCard } from "@/components/cities/CityCard";
 import { SEED_CITIES } from "@/lib/utils";
@@ -24,12 +25,20 @@ export default async function HomePage() {
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6">
       <div className="text-center py-4">
         <p className="text-5xl mb-2">🇯🇵</p>
-        <h1 className="text-3xl font-bold text-ink">Japan Trip</h1>
-        <p className="text-ink-muted mt-1 text-sm">Your personal trip planner</p>
+        <h1 className="text-3xl font-bold text-ink">Japan Tur</h1>
+        <p className="text-ink-muted mt-1 text-sm">Din personlige rejseplanlægger</p>
       </div>
 
       <section>
-        <h2 className="text-lg font-bold text-ink mb-3">Cities</h2>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-lg font-bold text-ink">Byer</h2>
+          <Link
+            href="/cities/new"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-japan-red text-white text-sm font-semibold active:scale-95 transition-transform"
+          >
+            + Tilføj by
+          </Link>
+        </div>
         <Suspense fallback={<CityGridSkeleton />}>
           <CityGrid />
         </Suspense>
@@ -44,9 +53,9 @@ async function CityGrid() {
   if (items.length === 0) {
     return (
       <div className="text-center py-10 text-ink-muted">
-        <p>No cities found.</p>
+        <p>Ingen byer fundet.</p>
         <p className="text-sm mt-1">
-          Run the supabase-schema.sql migration first.
+          Kør supabase-schema.sql migrationen først.
         </p>
       </div>
     );

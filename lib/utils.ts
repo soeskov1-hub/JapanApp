@@ -4,7 +4,7 @@ export function buildGoogleMapsUrl(address: string): string {
 }
 
 export const ENTRY_TYPES = [
-  { value: "destination", label: "Destination", emoji: "🗾" },
+  { value: "destination", label: "Seværdighed", emoji: "🗾" },
   { value: "restaurant", label: "Restaurant", emoji: "🍜" },
   { value: "shopping", label: "Shopping", emoji: "🛍️" },
   { value: "hotel", label: "Hotel", emoji: "🏨" },
@@ -12,8 +12,8 @@ export const ENTRY_TYPES = [
 ] as const;
 
 export const PRIORITY_OPTIONS = [
-  { value: "must-do", label: "Must-do", color: "bg-japan-red text-white" },
-  { value: "nice-to-have", label: "Nice-to-have", color: "bg-gold-light text-ink" },
+  { value: "must-do", label: "Skal ses", color: "bg-japan-red text-white" },
+  { value: "nice-to-have", label: "Hvis tid", color: "bg-gold-light text-ink" },
 ] as const;
 
 export const SEED_CITIES = [

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Home", emoji: "🏠" },
+  { href: "/", label: "Hjem", emoji: "🏠" },
 ];
 
 export function BottomNav() {

@@ -40,7 +40,7 @@ export function EntryForm({
           await createEntry(data);
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        setError(err instanceof Error ? err.message : "Noget gik galt");
       }
     });
   }
@@ -48,19 +48,19 @@ export function EntryForm({
   return (
     <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-5 p-5">
       <h2 className="text-xl font-bold text-ink">
-        {entry ? "Edit item" : "Add new item"}
+        {entry ? "Rediger" : "Tilføj ny"}
       </h2>
 
-      {/* City */}
+      {/* By */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-semibold text-ink-light">City</label>
+        <label className="text-sm font-semibold text-ink-light">By</label>
         <select
           name="city_id"
           defaultValue={entry?.city_id ?? defaultCityId ?? ""}
           required
           className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink focus:outline-none focus:ring-2 focus:ring-japan-red"
         >
-          <option value="" disabled>Select city…</option>
+          <option value="" disabled>Vælg by…</option>
           {cities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
           ))}
@@ -95,30 +95,30 @@ export function EntryForm({
         </div>
       </div>
 
-      {/* Name */}
+      {/* Navn */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-semibold text-ink-light">Name</label>
+        <label className="text-sm font-semibold text-ink-light">Navn</label>
         <input
           type="text"
           name="name"
           defaultValue={entry?.name ?? ""}
           required
-          placeholder="e.g. Senso-ji Temple"
+          placeholder="f.eks. Senso-ji Temple"
           className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
         />
       </div>
 
-      {/* Address (not for videos) */}
+      {/* Adresse (ikke til videoer) */}
       {selectedType !== "video" && (
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-semibold text-ink-light">
-            Address <span className="text-ink-muted font-normal">(opens Google Maps)</span>
+            Adresse <span className="text-ink-muted font-normal">(åbner Google Maps)</span>
           </label>
           <input
             type="text"
             name="address"
             defaultValue={entry?.address ?? ""}
-            placeholder="e.g. 2-3-1 Asakusa, Taito City, Tokyo"
+            placeholder="f.eks. 2-3-1 Asakusa, Taito City, Tokyo"
             className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
           />
         </div>
@@ -145,7 +145,7 @@ export function EntryForm({
                   onChange={() => setVideoSource(src)}
                   className="sr-only"
                 />
-                {src === "link" ? "🔗 Link / YouTube" : "📱 Upload from phone"}
+                {src === "link" ? "🔗 Link / YouTube" : "📱 Upload fra telefon"}
               </label>
             ))}
           </div>
@@ -166,21 +166,21 @@ export function EntryForm({
         </div>
       )}
 
-      {/* Notes */}
+      {/* Noter */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-semibold text-ink-light">Notes</label>
+        <label className="text-sm font-semibold text-ink-light">Noter</label>
         <textarea
           name="notes"
           defaultValue={entry?.notes ?? ""}
           rows={3}
-          placeholder="Opening hours, tips, recommendations…"
+          placeholder="Åbningstider, tips, anbefalinger…"
           className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red resize-none"
         />
       </div>
 
-      {/* Priority */}
+      {/* Prioritet */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-semibold text-ink-light">Priority</label>
+        <label className="text-sm font-semibold text-ink-light">Prioritet</label>
         <div className="grid grid-cols-2 gap-2">
           {PRIORITY_OPTIONS.map((p) => (
             <label
@@ -217,7 +217,7 @@ export function EntryForm({
         disabled={isPending}
         className="w-full py-3 rounded-xl bg-japan-red text-white font-bold text-base transition-all active:scale-95 disabled:opacity-60"
       >
-        {isPending ? "Saving…" : entry ? "Save changes" : "Add item"}
+        {isPending ? "Gemmer…" : entry ? "Gem ændringer" : "Tilføj"}
       </button>
     </form>
   );
@@ -243,7 +243,7 @@ function UploadVideoField({ defaultUrl }: { defaultUrl: string | null }) {
       const { url } = await res.json();
       setUploadedUrl(url);
     } catch {
-      setUploadError("Upload failed. Try again.");
+      setUploadError("Upload mislykkedes. Prøv igen.");
     } finally {
       setUploading(false);
     }
@@ -254,16 +254,15 @@ function UploadVideoField({ defaultUrl }: { defaultUrl: string | null }) {
       <input
         type="file"
         accept="video/*"
-        capture="environment"
         onChange={handleFileChange}
         className="text-sm text-ink-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-japan-red file:text-white file:font-medium"
       />
-      {uploading && <p className="text-sm text-ink-muted">Uploading…</p>}
+      {uploading && <p className="text-sm text-ink-muted">Uploader…</p>}
       {uploadError && <p className="text-sm text-japan-red">{uploadError}</p>}
       {uploadedUrl && (
         <>
           <input type="hidden" name="video_url" value={uploadedUrl} />
-          <p className="text-sm text-ink-muted">✓ Video uploaded</p>
+          <p className="text-sm text-ink-muted">✓ Video uploadet</p>
         </>
       )}
     </div>

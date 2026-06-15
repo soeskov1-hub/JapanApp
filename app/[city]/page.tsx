@@ -13,7 +13,7 @@ interface CityPageProps {
 
 export async function generateMetadata({ params }: CityPageProps) {
   const { city } = await params;
-  return { title: `${deslugify(city)} — Japan Trip` };
+  return { title: `${deslugify(city)} — Japan Tur` };
 }
 
 export default async function CityPage({ params, searchParams }: CityPageProps) {
@@ -40,7 +40,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
   const allEntries = entries ?? [];
 
   const tabs = [
-    { value: "all", label: "All", emoji: "🗾" },
+    { value: "all", label: "Alle", emoji: "🗾" },
     ...ENTRY_TYPES,
   ];
 
@@ -49,11 +49,11 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
       {/* Back + title */}
       <div>
         <Link href="/" className="text-ink-muted text-sm hover:text-ink">
-          ← Back
+          ← Tilbage
         </Link>
         <h1 className="text-2xl font-bold text-ink mt-1">{cityName}</h1>
         <p className="text-ink-muted text-sm">
-          {allEntries.length} {allEntries.length === 1 ? "item" : "items"}
+          {allEntries.length} {allEntries.length === 1 ? "sted" : "steder"}
         </p>
       </div>
 
@@ -98,7 +98,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
       <Link
         href={`/entries/new?city=${cityData.id}&citySlug=${citySlug}`}
         className="fixed bottom-20 right-4 z-30 w-14 h-14 bg-japan-red text-white rounded-full shadow-lg flex items-center justify-center text-2xl active:scale-90 transition-transform"
-        aria-label="Add item"
+        aria-label="Tilføj sted"
       >
         +
       </Link>
