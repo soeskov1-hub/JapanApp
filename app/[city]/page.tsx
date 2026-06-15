@@ -13,7 +13,7 @@ interface CityPageProps {
 
 export async function generateMetadata({ params }: CityPageProps) {
   const { city } = await params;
-  return { title: `${deslugify(city)} — Japan Tur` };
+  return { title: `${deslugify(city)} — Japan-app` };
 }
 
 export default async function CityPage({ params, searchParams }: CityPageProps) {
@@ -51,7 +51,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         <Link href="/" className="text-ink-muted text-sm hover:text-ink">
           ← Tilbage
         </Link>
-        <h1 className="text-2xl font-bold text-ink mt-1">{cityName}</h1>
+        <h1 className="text-2xl font-bold text-ink mt-1">{cityName} 🇯🇵</h1>
         <p className="text-ink-muted text-sm">
           {allEntries.length} {allEntries.length === 1 ? "sted" : "steder"}
         </p>

@@ -26,7 +26,7 @@ export function CityForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-5">
-      <h2 className="text-xl font-bold text-ink">Tilføj by</h2>
+      <h2 className="text-xl font-bold text-ink">Tilføj by 🇯🇵</h2>
 
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-semibold text-ink-light">Bynavn</label>

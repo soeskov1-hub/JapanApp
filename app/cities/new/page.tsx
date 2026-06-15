@@ -1,6 +1,6 @@
 import { CityForm } from "@/components/cities/CityForm";
 
-export const metadata = { title: "Tilføj by — Japan Tur" };
+export const metadata = { title: "Tilføj by — Japan-app" };
 
 export default function NewCityPage() {
   return (

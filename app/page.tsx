@@ -23,9 +23,14 @@ async function getCitiesWithCounts(): Promise<
 export default async function HomePage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6">
-      <div className="text-center py-4">
+      <div className="text-center py-4 flex flex-col items-center gap-3">
+        <img
+          src="/torii.png"
+          alt="Torii gate"
+          className="w-40 h-40 object-contain rounded-2xl"
+        />
         <h1 className="text-3xl font-bold text-ink">Japan-app 🇯🇵</h1>
-        <p className="text-ink-muted mt-1 text-sm">Din personlige rejseplanlægger</p>
+        <p className="text-ink-muted text-sm">Din personlige rejseplanlægger</p>
       </div>
 
       <section>

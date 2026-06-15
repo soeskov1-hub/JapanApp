@@ -11,9 +11,13 @@ const notoSerifJP = Noto_Serif_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Japan Trip",
-  description: "My Japan trip planner — destinations, restaurants, and more.",
+  title: { default: "Japan-app 🇯🇵", template: "%s 🇯🇵" },
+  description: "Min Japan-rejseplanlægger — seværdigheder, restauranter og mere.",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/torii.png",
+    apple: "/torii.png",
+  },
 };
 
 export const viewport: Viewport = {

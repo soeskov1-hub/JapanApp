@@ -48,7 +48,7 @@ export function EntryForm({
   return (
     <form onSubmit={handleSubmit} ref={formRef} className="flex flex-col gap-5 p-5">
       <h2 className="text-xl font-bold text-ink">
-        {entry ? "Rediger" : "Tilføj ny"}
+        {entry ? "Rediger 🇯🇵" : "Tilføj ny 🇯🇵"}
       </h2>
 
       {/* By */}
