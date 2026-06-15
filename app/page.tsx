@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { CityRow } from "@/components/cities/CityRow";
+import { SortableCityList } from "@/components/cities/SortableCityList";
 import type { City } from "@/lib/supabase/types";
 
 async function getCitiesWithCounts(): Promise<
@@ -11,7 +11,8 @@ async function getCitiesWithCounts(): Promise<
   const { data: cities } = await supabase
     .from("cities")
     .select("*, entries(count)")
-    .order("name");
+    .order("sort_order", { ascending: true })
+    .order("name", { ascending: true });
 
   return (cities ?? []).map((c) => ({
     city: { id: c.id, name: c.name, created_at: c.created_at },
@@ -23,8 +24,7 @@ export default async function HomePage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6">
       <div className="text-center py-4">
-        <p className="text-5xl mb-2">🇯🇵</p>
-        <h1 className="text-3xl font-bold text-ink">Japan Tur</h1>
+        <h1 className="text-3xl font-bold text-ink">Japan-app 🇯🇵</h1>
         <p className="text-ink-muted mt-1 text-sm">Din personlige rejseplanlægger</p>
       </div>
 
@@ -61,11 +61,13 @@ async function CityList() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      {items.map(({ city, count }) => (
-        <CityRow key={city.id} id={city.id} name={city.name} entryCount={count} />
-      ))}
-    </div>
+    <SortableCityList
+      cities={items.map(({ city, count }) => ({
+        id: city.id,
+        name: city.name,
+        entryCount: count,
+      }))}
+    />
   );
 }
 
