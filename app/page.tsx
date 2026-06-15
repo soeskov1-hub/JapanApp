@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { CityCard } from "@/components/cities/CityCard";
-import { SEED_CITIES } from "@/lib/utils";
+import { CityRow } from "@/components/cities/CityRow";
 import type { City } from "@/lib/supabase/types";
 
 async function getCitiesWithCounts(): Promise<
@@ -39,15 +38,15 @@ export default async function HomePage() {
             + Tilføj by
           </Link>
         </div>
-        <Suspense fallback={<CityGridSkeleton />}>
-          <CityGrid />
+        <Suspense fallback={<CityListSkeleton />}>
+          <CityList />
         </Suspense>
       </section>
     </div>
   );
 }
 
-async function CityGrid() {
+async function CityList() {
   const items = await getCitiesWithCounts();
 
   if (items.length === 0) {
@@ -62,19 +61,19 @@ async function CityGrid() {
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    <div className="flex flex-col gap-2">
       {items.map(({ city, count }) => (
-        <CityCard key={city.id} name={city.name} entryCount={count} />
+        <CityRow key={city.id} id={city.id} name={city.name} entryCount={count} />
       ))}
     </div>
   );
 }
 
-function CityGridSkeleton() {
+function CityListSkeleton() {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {SEED_CITIES.map((name) => (
-        <div key={name} className="h-32 rounded-2xl bg-paper-dark animate-pulse" />
+    <div className="flex flex-col gap-2">
+      {[...Array(5)].map((_, i) => (
+        <div key={i} className="h-16 rounded-xl bg-paper-dark animate-pulse" />
       ))}
     </div>
   );

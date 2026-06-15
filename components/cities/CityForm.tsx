@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { createCity } from "@/app/actions/cities";
 
 export function CityForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -14,6 +16,8 @@ export function CityForm() {
     startTransition(async () => {
       try {
         await createCity(data);
+        router.push("/");
+        router.refresh();
       } catch (err) {
         setError(err instanceof Error ? err.message : "Noget gik galt");
       }

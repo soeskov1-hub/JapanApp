@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export async function createCity(formData: FormData) {
@@ -17,5 +16,11 @@ export async function createCity(formData: FormData) {
   }
 
   revalidatePath("/");
-  redirect("/");
+}
+
+export async function deleteCity(id: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("cities").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath("/");
 }
