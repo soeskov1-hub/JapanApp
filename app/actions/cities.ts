@@ -30,6 +30,14 @@ export async function createCity(formData: FormData) {
 
 export async function deleteCity(id: string) {
   const supabase = await createClient();
+
+  // Delete entries belonging to this city first (FK constraint)
+  const { error: entriesError } = await supabase
+    .from("entries")
+    .delete()
+    .eq("city_id", id);
+  if (entriesError) throw new Error(entriesError.message);
+
   const { error } = await supabase.from("cities").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/");
