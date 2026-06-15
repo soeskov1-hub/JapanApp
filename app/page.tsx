@@ -30,7 +30,7 @@ export default async function HomePage() {
           className="w-40 h-40 object-contain rounded-2xl"
         />
         <h1 className="text-3xl font-bold text-ink">Japan-app 🇯🇵</h1>
-        <p className="text-ink-muted text-sm">Din personlige rejseplanlægger</p>
+        <p className="text-ink-muted text-sm">Basse og Asbjørns rejse til Japan</p>
       </div>
 
       <section>
