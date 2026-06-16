@@ -6,6 +6,7 @@ export function buildGoogleMapsUrl(address: string): string {
 export const ENTRY_TYPES = [
   { value: "destination", label: "Seværdighed", emoji: "🗾" },
   { value: "restaurant", label: "Restaurant", emoji: "🍜" },
+  { value: "bar", label: "Barer", emoji: "🍺" },
   { value: "shopping", label: "Shopping", emoji: "🛍️" },
   { value: "hotel", label: "Hotel", emoji: "🏨" },
   { value: "video", label: "Video", emoji: "🎬" },
