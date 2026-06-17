@@ -108,63 +108,62 @@ export function EntryForm({
         />
       </div>
 
-      {/* Adresse (ikke til videoer) */}
-      {selectedType !== "video" && (
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-semibold text-ink-light">
-            Adresse <span className="text-ink-muted font-normal">(åbner Google Maps)</span>
-          </label>
+      {/* Adresse */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-semibold text-ink-light">
+          Adresse <span className="text-ink-muted font-normal">(åbner Google Maps)</span>
+        </label>
+        <input
+          type="text"
+          name="address"
+          defaultValue={entry?.address ?? ""}
+          placeholder="f.eks. 2-3-1 Asakusa, Taito City, Tokyo"
+          className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-3 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
+        />
+      </div>
+
+      {/* Video / Link */}
+      <div className="flex flex-col gap-3">
+        <label className="text-sm font-semibold text-ink-light">
+          Video / Link <span className="text-ink-muted font-normal">(valgfri)</span>
+        </label>
+        <div className="flex gap-2">
+          {(["link", "upload"] as const).map((src) => (
+            <label
+              key={src}
+              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border cursor-pointer text-sm font-medium transition-all ${
+                videoSource === src
+                  ? "border-japan-red bg-japan-red/10 text-japan-red"
+                  : "border-paper-dark text-ink-muted"
+              }`}
+            >
+              <input
+                type="radio"
+                name="video_source"
+                value={src}
+                checked={videoSource === src}
+                onChange={() => setVideoSource(src)}
+                className="sr-only"
+              />
+              {src === "link" ? "🔗 Link / YouTube" : "📱 Upload fra telefon"}
+            </label>
+          ))}
+        </div>
+
+        {videoSource === "link" && (
           <input
-            type="text"
-            name="address"
-            defaultValue={entry?.address ?? ""}
-            placeholder="f.eks. 2-3-1 Asakusa, Taito City, Tokyo"
-            className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-3 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
+            type="url"
+            name="video_url"
+            defaultValue={entry?.video_url ?? ""}
+            placeholder="https://youtube.com/watch?v=..."
+            className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
           />
-        </div>
-      )}
+        )}
 
-      {/* Video fields */}
-      {selectedType === "video" && (
-        <div className="flex flex-col gap-3">
-          <div className="flex gap-2">
-            {(["link", "upload"] as const).map((src) => (
-              <label
-                key={src}
-                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border cursor-pointer text-sm font-medium transition-all ${
-                  videoSource === src
-                    ? "border-japan-red bg-japan-red/10 text-japan-red"
-                    : "border-paper-dark text-ink-muted"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="video_source"
-                  value={src}
-                  checked={videoSource === src}
-                  onChange={() => setVideoSource(src)}
-                  className="sr-only"
-                />
-                {src === "link" ? "🔗 Link / YouTube" : "📱 Upload fra telefon"}
-              </label>
-            ))}
-          </div>
-
-          {videoSource === "link" && (
-            <input
-              type="url"
-              name="video_url"
-              defaultValue={entry?.video_url ?? ""}
-              placeholder="https://youtube.com/watch?v=..."
-              className="w-full rounded-xl border border-paper-dark bg-paper px-3 py-2.5 text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-japan-red"
-            />
-          )}
-
-          {videoSource === "upload" && (
-            <UploadVideoField defaultUrl={entry?.video_url ?? null} />
-          )}
-        </div>
-      )}
+        {videoSource === "upload" && (
+          <UploadVideoField defaultUrl={entry?.video_url ?? null} />
+        )}
+      </div>
 
       {/* Noter */}
       <div className="flex flex-col gap-1.5">

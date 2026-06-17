@@ -61,7 +61,7 @@ export function EntryCard({ entry }: EntryCardProps) {
       )}
 
       {/* Video player */}
-      {entry.type === "video" && entry.video_url && (
+      {entry.video_url && (
         <VideoPlayer
           source={entry.video_source}
           url={entry.video_url}

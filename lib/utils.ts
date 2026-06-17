@@ -9,7 +9,7 @@ export const ENTRY_TYPES = [
   { value: "bar", label: "Barer", emoji: "🍺" },
   { value: "shopping", label: "Shopping", emoji: "🛍️" },
   { value: "hotel", label: "Hotel", emoji: "🏨" },
-  { value: "video", label: "Video", emoji: "🎬" },
+  { value: "andet", label: "Andet", emoji: "📎" },
 ] as const;
 
 export const PRIORITY_OPTIONS = [

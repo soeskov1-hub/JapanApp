@@ -1,4 +1,4 @@
-export type EntryType = "destination" | "restaurant" | "bar" | "shopping" | "hotel" | "video";
+export type EntryType = "destination" | "restaurant" | "bar" | "shopping" | "hotel" | "andet";
 export type Priority = "must-do" | "nice-to-have";
 export type VideoSource = "upload" | "link";
 
